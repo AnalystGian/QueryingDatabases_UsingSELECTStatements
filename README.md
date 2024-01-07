@@ -4,7 +4,7 @@
 
 -Retrieve data from tables of a database using SQL SELECT statement.
 
--Use different SQL operators together with the WHERE clause to set conditions on tables of a database for database manipulation,
+-Use different SQL operators together with the WHERE clause to set conditions on tables of a database for database manipulation.
 
 ## Below is the summary of the tasks performed in this project:
 
