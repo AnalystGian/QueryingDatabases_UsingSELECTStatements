@@ -32,6 +32,15 @@ SELECT * FROM salaries;
 -- you will learn how to set conditions on the result set of a query using the WHERE clause
 #############################
 
+-- The SELECT clause specifies the columns that you want a statement to return. In the SELECT
+-- clause, the SELECT keyowrd is followed by a list of column names, expressions and also a function.
+-- While the FROM clause is used to specify the source of the data you want to retrieve. The easiest
+-- way is to name a single table or view in the FROM clause of query, or you can qualify a table or
+-- view with either a database or schema with a dot notation. But since we are not using SQL JOINS, we
+-- dont need to qualify. Lastly, the WHERE clause, it is used to restrict query results to only rows of 
+-- interest. Also, when you want to explore a table with millions of rows, you never want to retrieve
+-- all rows because it will take an unnecessarily long time to run, thats why we do filtering.
+
 ##########
 -- SELECT - FROM
 
@@ -75,6 +84,12 @@ WHERE first_name = 'Hilari'
 -- using different SQL operators together with the WHERE clause
 #############################
 
+-- In SQL, operators can be symbols or keywords. They can perform calculations (+) or comparisons (BETWEEN).
+-- Logical operators are used to modify conditions, which result in TRUE, FALSE, or NULL. "AND" returns TRUE
+-- if both conditions are TRUE, and FALSE if either is FALSE, otherwise NULL. "OR" returns TRUE if either
+-- condition is TRUE, FALSE if both are FALSE, otherwise NULL. "NOT" returns TRUE if the condition is FALSE, 
+-- FALSE if it is TRUE, otherwise NULL. Comparison Operators like (=, <> or !=, >, <, >=, <=) are used to
+-- compare values in SQL queries, often in WHERE clauses.
 
 ###########
 -- AND
@@ -123,6 +138,11 @@ WHERE first_name = 'Kellie' OR first_name = 'Aruna';
 
 ###########
 -- Operator Precedence
+-- Operator precedence in SQL determines the order in which operators are evaluated in a query.
+-- When a SQL query contains multiple operators, the precedence rules dictate which operation is performed
+-- first. In mathematics, operations enclosed in parentheses are evaluated first according to PEMDAS rule,
+-- so its a good practice to apply using parenthesis for you specify the order of operation you want in your
+-- query. See the examples below.
 
 -- 3.5 Retrieve a list of all male or female employees whose last name is 'Denis'
 
@@ -146,6 +166,8 @@ WHERE gender = 'F' AND (first_name = 'Kellie' OR first_name = 'Aruna');
 
 ###########
 -- IN / NOT IN
+-- The IN operator is used to determine whether a value matches any value in a specified list.
+-- The NOT IN operator is used to determine whether a value does not match any value in a specified list.
 
 -- 3.7: Retrieve a list of all employees whose first name is either 'Cathie', 'Mark' or 'Nathan'
 
@@ -174,6 +196,11 @@ WHERE first_name NOT IN ('Cathie', 'Mark', 'Nathan');
 
 ###########
 -- LIKE / NOT LIKE 
+-- The LIKE and NOT LIKE operators in SQL are used for pattern matching within strings.
+-- They are particularly useful when you want to filter rows based on whether a certain
+-- column's value matches a specified pattern. These operators allow the use of wildcard
+-- characters to represent unknown parts of the string. The percent sign (%) is a wildcard
+-- that means one or more characters.
 
 -- 4.1: Extract a list of all employees whose first name starts with 'Mar'
 SELECT *
@@ -235,6 +262,10 @@ WHERE first_name NOT LIKE ('%Jack%');
 
 ###########
 -- BETWEEN - AND
+-- The BETWEEN operator in SQL is used to specify a range for filtering rows based on a specified condition.
+-- It allows you to retrieve rows where a column's value falls within a specified range of values, inclusive
+-- of both endpoints. The smaller of the two values should always be written first, with the AND operator
+-- separating the two.
 
 -- 5.1: Extract a list of all employees who were employed between
 -- 1st of January, 1990 and 1st January, 2000
@@ -273,6 +304,15 @@ WHERE emp_no NOT BETWEEN '10004' AND '10012';
 
 ###########
 -- IS NOT NULL / IS NULL
+-- The IS NULL and IS NOT NULL operators in SQL are used to check whether a column's value
+-- is NULL or not NULL, respectively. NULL represents the absence of a value or an unknown
+-- value in SQL. These operators are particularly useful for filtering rows based on the
+-- presence or absence of data in a specific column. These operators are handy for handling
+-- cases where you need to identify records where certain fields have not been populated or
+-- contain unknown values. It's important to note that comparing a column's value directly
+-- with NULL using equality operators like (=) will not work as expected because NULL is treated
+-- as unknown, and the result of any comparison with NULL is also unknown. Therefore, you should
+-- always use IS NULL or IS NOT NULL for checking NULL values in SQL queries.
 
 -- 5.5: Extract a list of employees whose first name is not null
    
@@ -308,6 +348,11 @@ WHERE dept_no IS NOT NULL;
 
 ###########
 -- Equal to (=) & Not Equal to (<> or !=)
+-- The equal to (=) and not equal to (<> or !=) operators in SQL are used to compare values in a
+-- WHERE clause to filter rows based on specific conditions. Both operators are essential for
+-- constructing WHERE clauses to filter rows based on specific criteria. They can be used with
+-- numerical, string, and date values, among others. It's important to choose the appropriate operator
+-- based on the desired comparison logic in order to retrieve the correct subset of data from the database.
 
 -- 6.1: Retrieve a list of all employees whose first name is 'Mark'
 
@@ -330,6 +375,8 @@ WHERE first_name <> 'Mark';
 
 #########
 -- Greater than & Less than
+-- The greater than (>) and less than (<) operators in SQL are also used to compare values in a WHERE clause to filter rows
+-- based on specific conditions related to numerical, string, or date values.
 
 -- 6.4: Retrieve a list of all employees who were employed after 1st of January, 1997.
 SELECT *
@@ -375,6 +422,7 @@ WHERE salary > 50000;
 
 ###########
 -- SELECT DISTINCT
+-- The SELECT DISTINCT statement is used to return only distinct (different) values in the specified columns.
 
 -- 7.1: Select distinct gender from the employees table
 
@@ -395,6 +443,7 @@ FROM employees;
     
 ###########
 -- ORDER BY
+-- The ORDER BY clause is used to sort the result set of a SELECT statement in either ascending or descending order.
 
 -- 7.3: Extract a list with employees' salaries higher than 50,000 dollars per annum
 -- Sort the list by the most paid employee
@@ -426,6 +475,11 @@ ORDER BY first_name, last_name ASC;
 
 ##########
 -- Limit and SQL Aliases
+-- The LIMIT clause is used to limit the number of rows returned by a query. LIMIT clause is one of
+-- ways to filter data for optimization purposes. SQL aliases are temporary names assigned to columns
+-- or tables in a SQL query to make the output more readable or to shorten the SQL code. Note that this 
+-- is not a permanent name change because the column names in the original tables remain unchaned. The
+-- alias only exists within a query. We use 'AS' keyword to give an alias name.
 
 -- 7.7: Retrieve a list of the first 100 records in the employees table 
 -- and order by emp_no in ascending order
